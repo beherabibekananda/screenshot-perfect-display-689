@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -12,6 +13,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Navbar } from "../components/site/Navbar";
+import { Footer } from "../components/site/Footer";
+import { SITE } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -78,8 +82,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Premium Agro Products" },
-      { name: "description", content: "Quality-focused agricultural and mushroom products, supplied across India." },
+      { title: `${SITE.name} | Fresh & Dry Oyster Mushroom Cultivation & Supply` },
+      { name: "description", content: `${SITE.name} – Manufacturer, supplier, and trader of Fresh, Dry, and White Oyster Mushrooms in Varanasi, Uttar Pradesh. Serving clients Pan India.` },
     ],
     links: [
       {
@@ -117,11 +121,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHome = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Navbar />
       <Outlet />
+      {!isHome && <Footer />}
     </QueryClientProvider>
   );
 }

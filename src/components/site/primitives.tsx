@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode, type AnchorHTMLAttributes } from "react";
+import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 
 export function Reveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
@@ -8,7 +9,7 @@ export function Reveal({ children, className, delay = 0 }: { children: ReactNode
     if (!el) return;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
+        if (e?.isIntersecting) {
           el.classList.add("is-visible");
           io.disconnect();
         }
@@ -36,17 +37,25 @@ export function Btn({
   variant = "primary",
   className,
   children,
+  href,
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: keyof typeof variants }) {
+  const classes = cn(
+    "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300",
+    variants[variant],
+    className,
+  );
+
+  if (href && href.startsWith("/") && !props.target) {
+    return (
+      <Link to={href} className={classes} {...(props as any)}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <a
-      className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300",
-        variants[variant],
-        className,
-      )}
-      {...props}
-    >
+    <a href={href} className={classes} {...props}>
       {children}
     </a>
   );

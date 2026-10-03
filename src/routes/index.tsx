@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE, PRODUCTS } from "@/lib/site";
-import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
-import { AboutSection } from "@/components/site/AboutSection";
-import { ProductSection } from "@/components/site/ProductSection";
-import { WhyChooseUs, ProcessTimeline, BulkCta, TestimonialCarousel, TrustSection } from "@/components/site/Sections";
-import { ContactForm } from "@/components/site/ContactForm";
-import { Footer } from "@/components/site/Footer";
 
 const title = `${SITE.name} | Premium Agro Products & Agricultural Supplier`;
 const description = `Discover quality-focused agricultural products from ${SITE.name}. Explore our products, bulk supply options and get in touch with our team.`;
@@ -41,20 +35,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <AboutSection />
-        <ProductSection />
-        <WhyChooseUs />
-        <ProcessTimeline />
-        <BulkCta />
-        <TestimonialCarousel />
-        <TrustSection />
-        <ContactForm />
-      </main>
-      <Footer />
-    </>
+    <main>
+      <Hero />
+    </main>
   );
 }
