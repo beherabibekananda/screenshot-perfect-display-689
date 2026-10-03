@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Business details (name, phone, WhatsApp, products) live in one shared config so placeholders can be swapped in one place.
+- Landing page sections are separate components composed on the home page; nav uses in-page anchors because the brief asks for a single scrolling page.
