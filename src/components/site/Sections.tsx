@@ -47,11 +47,11 @@ export function ProcessTimeline() {
     <section id="process" className="bg-cream py-24 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHead eyebrow="Our Process" title="From Farm to You" />
-        <ol className="relative mt-20 grid gap-12 md:grid-cols-5 md:gap-6">
+        <div className="relative mt-20 grid gap-12 md:grid-cols-5 md:gap-6">
           <div className="absolute left-7 top-0 h-full w-px bg-gold/50 md:left-0 md:top-7 md:h-px md:w-full" aria-hidden />
           {steps.map(([Icon, t, d], i) => (
             <Reveal key={t} delay={i * 140}>
-              <li className="relative flex gap-6 md:block">
+              <div className="relative flex gap-6 md:block">
                 <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold bg-background text-primary">
                   <Icon strokeWidth={1.3} size={22} />
                 </span>
@@ -60,10 +60,10 @@ export function ProcessTimeline() {
                   <h3 className="text-2xl">{t}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{d}</p>
                 </div>
-              </li>
+              </div>
             </Reveal>
           ))}
-        </ol>
+        </div>
       </div>
     </section>
   );
